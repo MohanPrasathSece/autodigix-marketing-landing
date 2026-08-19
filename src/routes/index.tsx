@@ -1,24 +1,67 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { Hero } from "@/components/site/hero";
+import { SiteNav } from "@/components/site/nav";
+import {
+  Approach,
+  Audience,
+  BigPicture,
+  Details,
+  Discover,
+  DigitalShift,
+  Faq,
+  FinalCta,
+  Footer,
+  Overview,
+  Roadmap,
+  StickyCta,
+  Takeaways,
+  Value,
+  WhyNow,
+} from "@/components/site/sections";
+
+const TITLE = "AUTODIGIX Webinar — AI + Digital Marketing, Live for ₹39";
+const DESC =
+  "Join the AUTODIGIX live online webinar on 29 August 2026, 6:00 PM. See the entire digital marketing ecosystem — SEO, ads, content, automation and AI — in one session for ₹39.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESC },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESC },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <SiteNav />
+      <main className="pb-20 sm:pb-0">
+        <Hero />
+        <DigitalShift />
+        <Overview />
+        <Discover />
+        <Roadmap />
+        <BigPicture />
+        <Audience />
+        <WhyNow />
+        <Takeaways />
+        <Approach />
+        <Details />
+        <Value />
+        <Faq />
+        <FinalCta />
+      </main>
+      <div id="footer">
+        <Footer />
+      </div>
+      <StickyCta />
     </div>
   );
 }
